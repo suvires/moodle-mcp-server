@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import "dotenv/config";
 import express, { type Request, type Response } from "express";
 import { randomUUID } from "node:crypto";
 
@@ -12,6 +13,9 @@ const MOODLE_CONFIG = {
   url: process.env.MOODLE_URL || "https://tu-moodle.com",
   token: process.env.MOODLE_TOKEN || "tu-token-aqui",
 };
+
+console.log("MOODLE_URL =", MOODLE_CONFIG.url);
+console.log("MOODLE_TOKEN =", MOODLE_CONFIG.token ? "set" : "missing");
 
 const PORT = Number(process.env.PORT || 3000);
 

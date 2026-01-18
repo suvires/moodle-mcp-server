@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "*",
+    "dotenv": "^17.2.3",
     "express": "*"
   },
   "devDependencies": {
