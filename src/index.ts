@@ -38,6 +38,11 @@ const TENANTS: Tenant[] = [
     moodleUrl: mustEnv("TENANT2_MOODLEURL"),
     moodleToken: mustEnv("TENANT2_MOODLETOKEN"),
   },
+  {
+    apiKey: process.env.TENANT3_APIKEY || "key_demo_3",
+    moodleUrl: mustEnv("TENANT3_MOODLEURL"),
+    moodleToken: mustEnv("TENANT3_MOODLETOKEN"),
+  },
 ];
 
 function findTenant(apiKey: string): Tenant | undefined {
