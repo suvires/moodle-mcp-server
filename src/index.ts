@@ -5,7 +5,10 @@ import { randomUUID } from "node:crypto";
 
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
-import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import {
+  CallToolRequestSchema,
+  ListToolsRequestSchema,
+} from "@modelcontextprotocol/sdk/types.js";
 
 import { callMoodleAPI } from "./moodle-client.js";
 
@@ -13,43 +16,59 @@ const PORT = Number(process.env.PORT || 3000);
 const app = express();
 app.use(express.json());
 
-// ====== 1) “Base de datos” mínima en memoria (desde .env) ======
+// ====== Config del panel ======
+const MCP_KEYS_ENDPOINT =
+  process.env.MCP_KEYS_ENDPOINT ?? "https://app.moodlemcp.com/api/mcp";
+
 type Tenant = {
-  apiKey: string;
   moodleUrl: string;
   moodleToken: string;
 };
 
-function mustEnv(name: string): string {
-  const v = process.env[name];
-  if (!v) throw new Error(`Missing env var: ${name}`);
-  return v;
+async function fetchTenantFromPanel(mcpKey: string): Promise<Tenant> {
+  const res = await fetch(MCP_KEYS_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      // opcional: si quieres identificar el MCP server
+      "User-Agent": "moodle-mcp-server/1.0",
+    },
+    body: JSON.stringify({ mcpKey }),
+  });
+
+  if (res.status === 200) {
+    const data = (await res.json()) as { moodleUrl: string; moodleToken: string };
+    if (!data?.moodleUrl || !data?.moodleToken) {
+      throw new Error("Invalid response from MCP Keys endpoint");
+    }
+    return { moodleUrl: data.moodleUrl, moodleToken: data.moodleToken };
+  }
+
+  // Mantén semántica: 404 no existe; 403 revocada/suspendida/expirada
+  if (res.status === 404) {
+    const err = new Error("MCP Key not found");
+    // @ts-expect-error attach status
+    err.statusCode = 404;
+    throw err;
+  }
+
+  if (res.status === 403) {
+    const err = new Error("MCP Key forbidden");
+    // @ts-expect-error attach status
+    err.statusCode = 403;
+    throw err;
+  }
+
+  const text = await res.text().catch(() => "");
+  const err = new Error(
+    `MCP Keys endpoint error (${res.status}): ${text || res.statusText}`,
+  );
+  // @ts-expect-error attach status
+  err.statusCode = 502;
+  throw err;
 }
 
-// Las API keys también pueden ir en .env (recomendado)
-const TENANTS: Tenant[] = [
-  {
-    apiKey: process.env.TENANT1_APIKEY || "key_demo_1",
-    moodleUrl: mustEnv("TENANT1_MOODLEURL"),
-    moodleToken: mustEnv("TENANT1_MOODLETOKEN"),
-  },
-  {
-    apiKey: process.env.TENANT2_APIKEY || "key_demo_2",
-    moodleUrl: mustEnv("TENANT2_MOODLEURL"),
-    moodleToken: mustEnv("TENANT2_MOODLETOKEN"),
-  },
-  {
-    apiKey: process.env.TENANT3_APIKEY || "key_demo_3",
-    moodleUrl: mustEnv("TENANT3_MOODLEURL"),
-    moodleToken: mustEnv("TENANT3_MOODLETOKEN"),
-  },
-];
-
-function findTenant(apiKey: string): Tenant | undefined {
-  return TENANTS.find((t) => t.apiKey === apiKey);
-}
-
-// ====== 2) Sesiones: sessionId -> tenant ======
+// ====== Sesiones: sessionId -> tenant ======
 type SessionCtx = {
   transport: StreamableHTTPServerTransport;
   mcpServer: Server;
@@ -59,14 +78,16 @@ type SessionCtx = {
 const sessions = new Map<string, SessionCtx>();
 
 function getSessionIdFromReq(req: Request): string | undefined {
-  return req.header("Mcp-Session-Id") || req.header("mcp-session-id") || undefined;
+  return (
+    req.header("Mcp-Session-Id") || req.header("mcp-session-id") || undefined
+  );
 }
 
 // Crea un MCP Server “atado” al tenant (closure)
 function createServerForTenant(tenant: Tenant): Server {
   const mcpServer = new Server(
     { name: "moodle-mcp", version: "1.0.0" },
-    { capabilities: { tools: {} } }
+    { capabilities: { tools: {} } },
   );
 
   mcpServer.setRequestHandler(ListToolsRequestSchema, async () => {
@@ -74,12 +95,12 @@ function createServerForTenant(tenant: Tenant): Server {
       tools: [
         {
           name: "get_site_info",
-          description: "Obtiene información general del sitio Moodle",
+          description: "Gets general information about the Moodle site",
           inputSchema: { type: "object", properties: {} },
         },
         {
           name: "get_courses",
-          description: "Obtiene la lista de cursos disponibles en Moodle",
+          description: "Gets the list of available courses in Moodle",
           inputSchema: { type: "object", properties: {} },
         },
       ],
@@ -98,7 +119,7 @@ function createServerForTenant(tenant: Tenant): Server {
             tenant.moodleUrl,
             tenant.moodleToken,
             "core_webservice_get_site_info",
-            {}
+            {},
           );
           break;
 
@@ -107,26 +128,32 @@ function createServerForTenant(tenant: Tenant): Server {
             tenant.moodleUrl,
             tenant.moodleToken,
             "core_course_get_courses",
-            {}
+            {},
           );
           break;
 
         default:
-          throw new Error(`Herramienta desconocida: ${name}`);
+          throw new Error(`Unknown tool: ${name}`);
       }
 
-      return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+      return {
+        content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+      };
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
-      return { content: [{ type: "text", text: `Error: ${msg}` }], isError: true };
+      return {
+        content: [{ type: "text", text: `Error: ${msg}` }],
+        isError: true,
+      };
     }
   });
 
   return mcpServer;
 }
 
-// ====== 3) Endpoint MCP con apiKey en la URL ======
-app.all("/mcp/:apiKey", async (req: Request, res: Response) => {
+// ====== Endpoint MCP: key en la URL (solo para enrutar el tenant) ======
+// Nota: tu key ya no valida local: la validamos llamando al panel.
+app.all("/mcp/:mcpKey", async (req: Request, res: Response) => {
   try {
     const method = req.method.toUpperCase();
     const sessionId = getSessionIdFromReq(req);
@@ -143,20 +170,17 @@ app.all("/mcp/:apiKey", async (req: Request, res: Response) => {
       return;
     }
 
-    // Si NO hay sesión, valida apiKey y crea sesión
-    const apiKeyParam = req.params.apiKey;
-const apiKey = Array.isArray(apiKeyParam) ? apiKeyParam[0] : apiKeyParam;
+    // Si NO hay sesión, valida mcpKey contra el panel y crea sesión
+    const mcpKeyParam = req.params.mcpKey;
+    const mcpKey = Array.isArray(mcpKeyParam) ? mcpKeyParam[0] : mcpKeyParam;
 
-if (!apiKey) {
-  res.status(400).send("Missing API key");
-  return;
-}
+    if (!mcpKey) {
+      res.status(400).send("Missing MCP key");
+      return;
+    }
 
-const tenant = findTenant(apiKey);
-if (!tenant) {
-  res.status(401).send("Invalid API key");
-  return;
-}
+    // 🔥 Aquí está el cambio: fetch al panel
+    const tenant = await fetchTenantFromPanel(mcpKey);
 
     const transport = new StreamableHTTPServerTransport({
       sessionIdGenerator: () => randomUUID(),
@@ -190,5 +214,6 @@ app.get("/health", (_req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 MCP multi-tenant on http://localhost:${PORT}/mcp/<API_KEY>`);
+  console.log(`🚀 MCP multi-tenant on http://localhost:${PORT}/mcp/<MCP_KEY>`);
+  console.log(`🔑 MCP Keys endpoint: ${MCP_KEYS_ENDPOINT}`);
 });
