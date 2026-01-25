@@ -17,8 +17,8 @@ export function createServerForTenant(tenant: Tenant): Server {
   );
 
   const toolMap = createToolMap(ALL_TOOLS);
-  const tenantRoles = tenant.moodleRole;
-  const hasAllowedRole = (allowedRoles: Tenant["moodleRole"]) =>
+  const tenantRoles = tenant.moodleRoles;
+  const hasAllowedRole = (allowedRoles: Tenant["moodleRoles"]) =>
     allowedRoles.some((role) => tenantRoles.includes(role));
 
   // 1) listTools: filtra por rol SIEMPRE
@@ -56,7 +56,7 @@ export function createServerForTenant(tenant: Tenant): Server {
               {
                 error: "FORBIDDEN_TOOL",
                 tool: spec.name,
-                roles: tenant.moodleRole,
+                roles: tenant.moodleRoles,
                 message: "This tool is not allowed for your role.",
               },
               null,

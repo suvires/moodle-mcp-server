@@ -29,35 +29,42 @@ async function fetchTenantFromPanel(mcpKey: string): Promise<Tenant> {
 
   if (res.status === 200) {
     const data = (await res.json()) as {
-      moodleUrl: string;
-      moodleToken: string;
-      moodleRole: Role[];
+      moodleUrl?: string;
+      moodleToken?: string;
+      moodleRoles?: Role[] | Role | string;
     };
 
-    if (!data?.moodleUrl || !data?.moodleToken || !Array.isArray(data?.moodleRole)) {
+    const rolesRaw = data?.moodleRoles;
+    const roles = Array.isArray(rolesRaw)
+      ? rolesRaw
+      : typeof rolesRaw === "string"
+        ? [rolesRaw]
+        : undefined;
+
+    if (!data?.moodleUrl || !data?.moodleToken || !roles) {
       throw new Error(
-        "Invalid response from MCP Keys endpoint (missing moodleUrl/moodleToken/moodleRole)",
+        "Invalid response from MCP Keys endpoint (missing moodleUrl/moodleToken/moodleRoles)",
       );
     }
 
     // Runtime guard: panel puede devolver cualquier string aunque TS diga Role
-    if (data.moodleRole.length === 0) {
-      throw new Error("Invalid moodleRole from MCP Keys endpoint: empty array");
+    if (roles.length === 0) {
+      throw new Error("Invalid moodleRoles from MCP Keys endpoint: empty array");
     }
 
-    const invalidRole = data.moodleRole.find(
+    const invalidRole = roles.find(
       (role) => typeof role !== "string" || !ALLOWED_ROLES_SET.has(role as Role),
     );
     if (invalidRole) {
       throw new Error(
-        `Invalid moodleRole from MCP Keys endpoint: ${String(invalidRole)}`,
+        `Invalid moodleRoles from MCP Keys endpoint: ${String(invalidRole)}`,
       );
     }
 
     return {
       moodleUrl: data.moodleUrl,
       moodleToken: data.moodleToken,
-      moodleRole: data.moodleRole,
+      moodleRoles: roles,
     };
   }
 
