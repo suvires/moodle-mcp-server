@@ -13,7 +13,7 @@ export const core_enrol_tools: ToolSpec[] = [
       required: ["userid"],
       additionalProperties: false,
     },
-    allowedRoles: ["admin", "manager", "teacher", "noneditingteacher", "student"],
+    allowedRoles: ["admin", "manager", "editingteacher", "teacher", "student"],
     examples: {
       minimal: { userid: 123 },
     },

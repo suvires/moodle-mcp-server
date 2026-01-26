@@ -10,7 +10,7 @@ export const core_webservice_tools: ToolSpec[] = [
       properties: {},
       additionalProperties: false,
     },
-    allowedRoles: ["admin", "manager", "teacher", "noneditingteacher", "student", "authenticateduser"],
+    allowedRoles: ["admin", "manager", "editingteacher", "teacher", "student", "user"],
     examples: {
       minimal: {},
     },
