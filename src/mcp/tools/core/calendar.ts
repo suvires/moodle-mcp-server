@@ -210,6 +210,38 @@ export type CreateCalendarEventsResponse = {
   warnings?: CalendarWarning[];
 };
 
+export type CalendarPermissionsResponse = {
+  canmanageentries: number;
+  canmanageownentries: number;
+  canmanagegroupentries: number;
+  warnings?: CalendarWarning[];
+};
+
+export const calendarPermissionsResponseSchema = {
+  type: "object",
+  properties: {
+    canmanageentries: { type: "number" },
+    canmanageownentries: { type: "number" },
+    canmanagegroupentries: { type: "number" },
+    warnings: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          item: { type: "string" },
+          itemid: { type: "number" },
+          warningcode: { type: "string" },
+          message: { type: "string" },
+        },
+        required: ["warningcode", "message"],
+        additionalProperties: false,
+      },
+    },
+  },
+  required: ["canmanageentries", "canmanageownentries", "canmanagegroupentries"],
+  additionalProperties: false,
+};
+
 // --- AJV response schemas ---
 export const createdCalendarEventSchema = {
   type: "object",
@@ -349,6 +381,23 @@ export const core_calendar_tools: ToolSpec[] = [
       },
     },
   },
+  {
+    name: "core_calendar_get_calendar_permissions",
+    moodleFunction: "core_calendar_get_calendar_permissions",
+    description: "Convenience function to retrieve permissions/access information for a course calendar.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        courseid: { type: "number" },
+      },
+      additionalProperties: false,
+    },
+    allowedRoles: ["admin", "manager", "editingteacher", "teacher", "student", "user"],
+    examples: {
+      minimal: { courseid: 0 },
+      typical: { courseid: 2 },
+    },
+  },
 ];
 
 /**
@@ -383,6 +432,41 @@ export async function createCalendarEvents(
   }
 
   return resp as CreateCalendarEventsResponse;
+}
+
+/**
+ * Helper to get calendar permissions for a tenant/course.
+ * - courseid is optional (default 0 for site calendar)
+ */
+export async function getCalendarPermissions(
+  tenant: Tenant,
+  courseid?: number,
+  options?: { signal?: AbortSignal; timeoutMs?: number },
+): Promise<CalendarPermissionsResponse> {
+  const params = courseid === undefined ? {} : { courseid };
+
+  const resp = await callMoodleAPI(
+    tenant.moodleUrl,
+    tenant.moodleToken,
+    "core_calendar_get_calendar_permissions",
+    params,
+    { method: "GET", signal: options?.signal, timeoutMs: options?.timeoutMs },
+  );
+
+  const { ok, errors } = validateSchema(calendarPermissionsResponseSchema, resp);
+  if (!ok) {
+    const fakeSpec = {
+      name: "core_calendar_get_calendar_permissions:response",
+      inputSchema: calendarPermissionsResponseSchema,
+    } as any;
+
+    const payload = formatValidationError(fakeSpec, errors);
+    throw new Error(
+      `Invalid response from core_calendar_get_calendar_permissions: ${JSON.stringify(payload)}`,
+    );
+  }
+
+  return resp as CalendarPermissionsResponse;
 }
 
 export default {};

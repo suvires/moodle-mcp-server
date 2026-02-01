@@ -184,4 +184,59 @@ describe("createCalendarEvents", () => {
 
     await expect(createCalendarEvents(tenant, reqEvents, { timeoutMs: 1 })).rejects.toThrow(/timeout/);
   });
+
+  describe("getCalendarPermissions", () => {
+    it("returns parsed permissions when response is valid", async () => {
+      const tenant: Tenant = { moodleUrl: "https://moodle.test", moodleToken: "token", moodleRoles: ["user"] };
+
+      const apiResp = {
+        canmanageentries: 1,
+        canmanageownentries: 0,
+        canmanagegroupentries: 0,
+      };
+
+      (callMoodleAPI as any).mockResolvedValueOnce(apiResp);
+
+      const { getCalendarPermissions } = await import("./calendar.js");
+      const res = await getCalendarPermissions(tenant, 2);
+
+      expect(res).toEqual(apiResp);
+      expect(callMoodleAPI).toHaveBeenCalledWith(
+        tenant.moodleUrl,
+        tenant.moodleToken,
+        "core_calendar_get_calendar_permissions",
+        { courseid: 2 },
+        expect.any(Object),
+      );
+    });
+
+    it("works when courseid is omitted (defaults) and forwards options", async () => {
+      const tenant: Tenant = { moodleUrl: "https://moodle.test", moodleToken: "token", moodleRoles: ["user"] };
+
+      const apiResp = {
+        canmanageentries: 0,
+        canmanageownentries: 1,
+        canmanagegroupentries: 0,
+      };
+
+      (callMoodleAPI as any).mockResolvedValueOnce(apiResp);
+
+      const { getCalendarPermissions } = await import("./calendar.js");
+      const controller = new AbortController();
+      const res = await getCalendarPermissions(tenant, undefined, { signal: controller.signal, timeoutMs: 2000 });
+
+      expect(res).toEqual(apiResp);
+
+      const lastCall = (callMoodleAPI as any).mock.calls[(callMoodleAPI as any).mock.calls.length - 1];
+      expect(lastCall[4]).toEqual({ method: "GET", signal: controller.signal, timeoutMs: 2000 });
+    });
+
+    it("throws when API returns invalid response", async () => {
+      const tenant: Tenant = { moodleUrl: "https://moodle.test", moodleToken: "token", moodleRoles: ["user"] };
+      (callMoodleAPI as any).mockResolvedValueOnce({ bad: "shape" });
+
+      const { getCalendarPermissions } = await import("./calendar.js");
+      await expect(getCalendarPermissions(tenant, 0)).rejects.toThrow(/VALIDATION_ERROR/);
+    });
+  });
 });
