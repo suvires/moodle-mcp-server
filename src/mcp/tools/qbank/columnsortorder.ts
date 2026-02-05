@@ -1,10 +1,10 @@
 import type { ToolSpec } from "../../types.js";
 
-export const core_calendar_tools: ToolSpec[] = [
+export const qbank_columnsortorder_tools: ToolSpec[] = [
   {
-    name: "core_calendar_get_calendar_event_by_id",
-    moodleFunction: "core_calendar_get_calendar_event_by_id",
-    description: "Moodle web service function `core_calendar_get_calendar_event_by_id`.",
+    name: "qbank_columnsortorder_set_column_size",
+    moodleFunction: "qbank_columnsortorder_set_column_size",
+    description: "Moodle web service function `qbank_columnsortorder_set_column_size`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -14,9 +14,9 @@ export const core_calendar_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_calendar_get_calendar_events",
-    moodleFunction: "core_calendar_get_calendar_events",
-    description: "Moodle web service function `core_calendar_get_calendar_events`.",
+    name: "qbank_columnsortorder_set_columnbank_order",
+    moodleFunction: "qbank_columnsortorder_set_columnbank_order",
+    description: "Moodle web service function `qbank_columnsortorder_set_columnbank_order`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -26,9 +26,9 @@ export const core_calendar_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_calendar_update_event_start_day",
-    moodleFunction: "core_calendar_update_event_start_day",
-    description: "Moodle web service function `core_calendar_update_event_start_day`.",
+    name: "qbank_columnsortorder_set_hidden_columns",
+    moodleFunction: "qbank_columnsortorder_set_hidden_columns",
+    description: "Moodle web service function `qbank_columnsortorder_set_hidden_columns`.",
     inputSchema: {
       type: "object",
       properties: {},

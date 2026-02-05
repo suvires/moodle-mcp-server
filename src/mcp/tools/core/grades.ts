@@ -1,0 +1,148 @@
+import type { ToolSpec } from "../../types.js";
+
+export const core_grades_tools: ToolSpec[] = [
+  {
+    name: "core_grades_create_gradecategories",
+    moodleFunction: "core_grades_create_gradecategories",
+    description: "Moodle web service function `core_grades_create_gradecategories`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_get_enrolled_users_for_selector",
+    moodleFunction: "core_grades_get_enrolled_users_for_selector",
+    description: "Moodle web service function `core_grades_get_enrolled_users_for_selector`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_get_feedback",
+    moodleFunction: "core_grades_get_feedback",
+    description: "Moodle web service function `core_grades_get_feedback`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_get_gradable_users",
+    moodleFunction: "core_grades_get_gradable_users",
+    description: "Moodle web service function `core_grades_get_gradable_users`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_get_grade_tree",
+    moodleFunction: "core_grades_get_grade_tree",
+    description: "Moodle web service function `core_grades_get_grade_tree`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_get_gradeitems",
+    moodleFunction: "core_grades_get_gradeitems",
+    description: "Moodle web service function `core_grades_get_gradeitems`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_get_groups_for_selector",
+    moodleFunction: "core_grades_get_groups_for_selector",
+    description: "Moodle web service function `core_grades_get_groups_for_selector`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_grader_gradingpanel_point_fetch",
+    moodleFunction: "core_grades_grader_gradingpanel_point_fetch",
+    description: "Moodle web service function `core_grades_grader_gradingpanel_point_fetch`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_grader_gradingpanel_point_store",
+    moodleFunction: "core_grades_grader_gradingpanel_point_store",
+    description: "Moodle web service function `core_grades_grader_gradingpanel_point_store`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_grader_gradingpanel_scale_fetch",
+    moodleFunction: "core_grades_grader_gradingpanel_scale_fetch",
+    description: "Moodle web service function `core_grades_grader_gradingpanel_scale_fetch`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_grader_gradingpanel_scale_store",
+    moodleFunction: "core_grades_grader_gradingpanel_scale_store",
+    description: "Moodle web service function `core_grades_grader_gradingpanel_scale_store`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+  {
+    name: "core_grades_update_grades",
+    moodleFunction: "core_grades_update_grades",
+    description: "Moodle web service function `core_grades_update_grades`.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: true,
+    },
+    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
+    examples: { minimal: {} },
+  },
+];

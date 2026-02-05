@@ -20,7 +20,7 @@ export type Tenant = {
 export type JSONSchemaProperty = {
   type?: string;
   description?: string;
-  enum?: string[];
+  enum?: (string | number | boolean)[];
   default?: unknown;
   items?: JSONSchemaProperty;
   properties?: Record<string, JSONSchemaProperty>;

@@ -1,10 +1,10 @@
 import type { ToolSpec } from "../../types.js";
 
-export const core_calendar_tools: ToolSpec[] = [
+export const core_block_tools: ToolSpec[] = [
   {
-    name: "core_calendar_get_calendar_event_by_id",
-    moodleFunction: "core_calendar_get_calendar_event_by_id",
-    description: "Moodle web service function `core_calendar_get_calendar_event_by_id`.",
+    name: "core_block_fetch_addable_blocks",
+    moodleFunction: "core_block_fetch_addable_blocks",
+    description: "Moodle web service function `core_block_fetch_addable_blocks`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -14,9 +14,9 @@ export const core_calendar_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_calendar_get_calendar_events",
-    moodleFunction: "core_calendar_get_calendar_events",
-    description: "Moodle web service function `core_calendar_get_calendar_events`.",
+    name: "core_block_get_course_blocks",
+    moodleFunction: "core_block_get_course_blocks",
+    description: "Moodle web service function `core_block_get_course_blocks`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -26,9 +26,9 @@ export const core_calendar_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_calendar_update_event_start_day",
-    moodleFunction: "core_calendar_update_event_start_day",
-    description: "Moodle web service function `core_calendar_update_event_start_day`.",
+    name: "core_block_get_dashboard_blocks",
+    moodleFunction: "core_block_get_dashboard_blocks",
+    description: "Moodle web service function `core_block_get_dashboard_blocks`.",
     inputSchema: {
       type: "object",
       properties: {},

@@ -1,10 +1,10 @@
 import type { ToolSpec } from "../../types.js";
 
-export const core_course_tools: ToolSpec[] = [
+export const mod_quiz_tools: ToolSpec[] = [
   {
-    name: "core_course_add_content_item_to_user_favourites",
-    moodleFunction: "core_course_add_content_item_to_user_favourites",
-    description: "Moodle web service function `core_course_add_content_item_to_user_favourites`.",
+    name: "mod_quiz_add_random_questions",
+    moodleFunction: "mod_quiz_add_random_questions",
+    description: "Moodle web service function `mod_quiz_add_random_questions`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -14,9 +14,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_check_updates",
-    moodleFunction: "core_course_check_updates",
-    description: "Moodle web service function `core_course_check_updates`.",
+    name: "mod_quiz_create_grade_item_per_section",
+    moodleFunction: "mod_quiz_create_grade_item_per_section",
+    description: "Moodle web service function `mod_quiz_create_grade_item_per_section`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -26,9 +26,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_create_categories",
-    moodleFunction: "core_course_create_categories",
-    description: "Moodle web service function `core_course_create_categories`.",
+    name: "mod_quiz_create_grade_items",
+    moodleFunction: "mod_quiz_create_grade_items",
+    description: "Moodle web service function `mod_quiz_create_grade_items`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -38,9 +38,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_create_courses",
-    moodleFunction: "core_course_create_courses",
-    description: "Moodle web service function `core_course_create_courses`.",
+    name: "mod_quiz_delete_grade_items",
+    moodleFunction: "mod_quiz_delete_grade_items",
+    description: "Moodle web service function `mod_quiz_delete_grade_items`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -50,9 +50,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_delete_categories",
-    moodleFunction: "core_course_delete_categories",
-    description: "Moodle web service function `core_course_delete_categories`.",
+    name: "mod_quiz_delete_overrides",
+    moodleFunction: "mod_quiz_delete_overrides",
+    description: "Moodle web service function `mod_quiz_delete_overrides`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -62,9 +62,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_delete_courses",
-    moodleFunction: "core_course_delete_courses",
-    description: "Moodle web service function `core_course_delete_courses`.",
+    name: "mod_quiz_get_attempt_access_information",
+    moodleFunction: "mod_quiz_get_attempt_access_information",
+    description: "Moodle web service function `mod_quiz_get_attempt_access_information`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -74,9 +74,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_delete_modules",
-    moodleFunction: "core_course_delete_modules",
-    description: "Moodle web service function `core_course_delete_modules`.",
+    name: "mod_quiz_get_attempt_data",
+    moodleFunction: "mod_quiz_get_attempt_data",
+    description: "Moodle web service function `mod_quiz_get_attempt_data`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -86,9 +86,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_duplicate_course",
-    moodleFunction: "core_course_duplicate_course",
-    description: "Moodle web service function `core_course_duplicate_course`.",
+    name: "mod_quiz_get_attempt_review",
+    moodleFunction: "mod_quiz_get_attempt_review",
+    description: "Moodle web service function `mod_quiz_get_attempt_review`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -98,9 +98,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_edit_module",
-    moodleFunction: "core_course_edit_module",
-    description: "Moodle web service function `core_course_edit_module`.",
+    name: "mod_quiz_get_attempt_summary",
+    moodleFunction: "mod_quiz_get_attempt_summary",
+    description: "Moodle web service function `mod_quiz_get_attempt_summary`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -110,9 +110,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_edit_section",
-    moodleFunction: "core_course_edit_section",
-    description: "Moodle web service function `core_course_edit_section`.",
+    name: "mod_quiz_get_combined_review_options",
+    moodleFunction: "mod_quiz_get_combined_review_options",
+    description: "Moodle web service function `mod_quiz_get_combined_review_options`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -122,9 +122,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_categories",
-    moodleFunction: "core_course_get_categories",
-    description: "Moodle web service function `core_course_get_categories`.",
+    name: "mod_quiz_get_edit_grading_page_data",
+    moodleFunction: "mod_quiz_get_edit_grading_page_data",
+    description: "Moodle web service function `mod_quiz_get_edit_grading_page_data`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -134,9 +134,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_contents",
-    moodleFunction: "core_course_get_contents",
-    description: "Moodle web service function `core_course_get_contents`.",
+    name: "mod_quiz_get_overrides",
+    moodleFunction: "mod_quiz_get_overrides",
+    description: "Moodle web service function `mod_quiz_get_overrides`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -146,9 +146,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_course_content_items",
-    moodleFunction: "core_course_get_course_content_items",
-    description: "Moodle web service function `core_course_get_course_content_items`.",
+    name: "mod_quiz_get_quiz_access_information",
+    moodleFunction: "mod_quiz_get_quiz_access_information",
+    description: "Moodle web service function `mod_quiz_get_quiz_access_information`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -158,9 +158,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_course_module",
-    moodleFunction: "core_course_get_course_module",
-    description: "Moodle web service function `core_course_get_course_module`.",
+    name: "mod_quiz_get_quiz_feedback_for_grade",
+    moodleFunction: "mod_quiz_get_quiz_feedback_for_grade",
+    description: "Moodle web service function `mod_quiz_get_quiz_feedback_for_grade`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -170,9 +170,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_course_module_by_instance",
-    moodleFunction: "core_course_get_course_module_by_instance",
-    description: "Moodle web service function `core_course_get_course_module_by_instance`.",
+    name: "mod_quiz_get_quiz_required_qtypes",
+    moodleFunction: "mod_quiz_get_quiz_required_qtypes",
+    description: "Moodle web service function `mod_quiz_get_quiz_required_qtypes`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -182,9 +182,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_courses",
-    moodleFunction: "core_course_get_courses",
-    description: "Moodle web service function `core_course_get_courses`.",
+    name: "mod_quiz_get_quizzes_by_courses",
+    moodleFunction: "mod_quiz_get_quizzes_by_courses",
+    description: "Moodle web service function `mod_quiz_get_quizzes_by_courses`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -194,9 +194,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_courses_by_field",
-    moodleFunction: "core_course_get_courses_by_field",
-    description: "Moodle web service function `core_course_get_courses_by_field`.",
+    name: "mod_quiz_get_reopen_attempt_confirmation",
+    moodleFunction: "mod_quiz_get_reopen_attempt_confirmation",
+    description: "Moodle web service function `mod_quiz_get_reopen_attempt_confirmation`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -206,9 +206,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_enrolled_courses_by_timeline_classification",
-    moodleFunction: "core_course_get_enrolled_courses_by_timeline_classification",
-    description: "Moodle web service function `core_course_get_enrolled_courses_by_timeline_classification`.",
+    name: "mod_quiz_get_user_attempts",
+    moodleFunction: "mod_quiz_get_user_attempts",
+    description: "Moodle web service function `mod_quiz_get_user_attempts`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -218,9 +218,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_enrolled_courses_with_action_events_by_timeline_classification",
-    moodleFunction: "core_course_get_enrolled_courses_with_action_events_by_timeline_classification",
-    description: "Moodle web service function `core_course_get_enrolled_courses_with_action_events_by_timeline_classification`.",
+    name: "mod_quiz_get_user_best_grade",
+    moodleFunction: "mod_quiz_get_user_best_grade",
+    description: "Moodle web service function `mod_quiz_get_user_best_grade`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -230,9 +230,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_enrolled_users_by_cmid",
-    moodleFunction: "core_course_get_enrolled_users_by_cmid",
-    description: "Moodle web service function `core_course_get_enrolled_users_by_cmid`.",
+    name: "mod_quiz_get_user_quiz_attempts",
+    moodleFunction: "mod_quiz_get_user_quiz_attempts",
+    description: "Moodle web service function `mod_quiz_get_user_quiz_attempts`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -242,9 +242,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_module",
-    moodleFunction: "core_course_get_module",
-    description: "Moodle web service function `core_course_get_module`.",
+    name: "mod_quiz_process_attempt",
+    moodleFunction: "mod_quiz_process_attempt",
+    description: "Moodle web service function `mod_quiz_process_attempt`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -254,9 +254,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_recent_courses",
-    moodleFunction: "core_course_get_recent_courses",
-    description: "Moodle web service function `core_course_get_recent_courses`.",
+    name: "mod_quiz_reopen_attempt",
+    moodleFunction: "mod_quiz_reopen_attempt",
+    description: "Moodle web service function `mod_quiz_reopen_attempt`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -266,9 +266,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_updates_since",
-    moodleFunction: "core_course_get_updates_since",
-    description: "Moodle web service function `core_course_get_updates_since`.",
+    name: "mod_quiz_save_attempt",
+    moodleFunction: "mod_quiz_save_attempt",
+    description: "Moodle web service function `mod_quiz_save_attempt`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -278,9 +278,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_user_administration_options",
-    moodleFunction: "core_course_get_user_administration_options",
-    description: "Moodle web service function `core_course_get_user_administration_options`.",
+    name: "mod_quiz_save_overrides",
+    moodleFunction: "mod_quiz_save_overrides",
+    description: "Moodle web service function `mod_quiz_save_overrides`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -290,9 +290,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_get_user_navigation_options",
-    moodleFunction: "core_course_get_user_navigation_options",
-    description: "Moodle web service function `core_course_get_user_navigation_options`.",
+    name: "mod_quiz_set_question_version",
+    moodleFunction: "mod_quiz_set_question_version",
+    description: "Moodle web service function `mod_quiz_set_question_version`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -302,9 +302,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_import_course",
-    moodleFunction: "core_course_import_course",
-    description: "Moodle web service function `core_course_import_course`.",
+    name: "mod_quiz_start_attempt",
+    moodleFunction: "mod_quiz_start_attempt",
+    description: "Moodle web service function `mod_quiz_start_attempt`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -314,9 +314,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_remove_content_item_from_user_favourites",
-    moodleFunction: "core_course_remove_content_item_from_user_favourites",
-    description: "Moodle web service function `core_course_remove_content_item_from_user_favourites`.",
+    name: "mod_quiz_update_filter_condition",
+    moodleFunction: "mod_quiz_update_filter_condition",
+    description: "Moodle web service function `mod_quiz_update_filter_condition`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -326,9 +326,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_search_courses",
-    moodleFunction: "core_course_search_courses",
-    description: "Moodle web service function `core_course_search_courses`.",
+    name: "mod_quiz_update_grade_items",
+    moodleFunction: "mod_quiz_update_grade_items",
+    description: "Moodle web service function `mod_quiz_update_grade_items`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -338,9 +338,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_set_favourite_courses",
-    moodleFunction: "core_course_set_favourite_courses",
-    description: "Moodle web service function `core_course_set_favourite_courses`.",
+    name: "mod_quiz_update_slots",
+    moodleFunction: "mod_quiz_update_slots",
+    description: "Moodle web service function `mod_quiz_update_slots`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -350,9 +350,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_toggle_activity_recommendation",
-    moodleFunction: "core_course_toggle_activity_recommendation",
-    description: "Moodle web service function `core_course_toggle_activity_recommendation`.",
+    name: "mod_quiz_view_attempt",
+    moodleFunction: "mod_quiz_view_attempt",
+    description: "Moodle web service function `mod_quiz_view_attempt`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -362,9 +362,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_update_categories",
-    moodleFunction: "core_course_update_categories",
-    description: "Moodle web service function `core_course_update_categories`.",
+    name: "mod_quiz_view_attempt_review",
+    moodleFunction: "mod_quiz_view_attempt_review",
+    description: "Moodle web service function `mod_quiz_view_attempt_review`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -374,9 +374,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_update_courses",
-    moodleFunction: "core_course_update_courses",
-    description: "Moodle web service function `core_course_update_courses`.",
+    name: "mod_quiz_view_attempt_summary",
+    moodleFunction: "mod_quiz_view_attempt_summary",
+    description: "Moodle web service function `mod_quiz_view_attempt_summary`.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -386,21 +386,9 @@ export const core_course_tools: ToolSpec[] = [
     examples: { minimal: {} },
   },
   {
-    name: "core_course_view_course",
-    moodleFunction: "core_course_view_course",
-    description: "Moodle web service function `core_course_view_course`.",
-    inputSchema: {
-      type: "object",
-      properties: {},
-      additionalProperties: true,
-    },
-    allowedRoles: ["admin","manager","editingteacher","teacher","student","user"],
-    examples: { minimal: {} },
-  },
-  {
-    name: "core_course_view_module_instance_list",
-    moodleFunction: "core_course_view_module_instance_list",
-    description: "Moodle web service function `core_course_view_module_instance_list`.",
+    name: "mod_quiz_view_quiz",
+    moodleFunction: "mod_quiz_view_quiz",
+    description: "Moodle web service function `mod_quiz_view_quiz`.",
     inputSchema: {
       type: "object",
       properties: {},
