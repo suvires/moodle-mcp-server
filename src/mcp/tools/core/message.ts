@@ -140,7 +140,7 @@ export const core_message_tools: ToolSpec[] = [
       additionalProperties: false,
     },
     allowedRoles: ["admin", "manager", "editingteacher", "teacher", "student", "user"],
-    examples: { minimal: { userid: 0 as any, otheruserid: 123 } }, // many installs use current user implicitly; keep example flexible
+    examples: { minimal: { userid: 1, otheruserid: 123 } },
   },
   {
     name: "core_message_get_self_conversation",

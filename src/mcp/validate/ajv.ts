@@ -26,7 +26,7 @@ export function validateToolArgs(
 
 // Generic validation for arbitrary schemas (responses or other payloads)
 export function validateSchema(
-  schema: any,
+  schema: SchemaObject,
   data: unknown,
 ): { ok: boolean; errors: ErrorObject[] | null | undefined } {
   const validate = ajv.compile(schema);

@@ -4,13 +4,21 @@ export const tool_admin_tools: ToolSpec[] = [
   {
     name: "tool_admin_presets_delete_preset",
     moodleFunction: "tool_admin_presets_delete_preset",
-    description: "Moodle web service function `tool_admin_presets_delete_preset`.",
+    description:
+      "Deletes an admin preset configuration. Admin presets are saved site configuration snapshots that can be applied to quickly configure Moodle settings.",
     inputSchema: {
       type: "object",
-      properties: {},
-      additionalProperties: true,
+      properties: {
+        id: {
+          type: "integer",
+          minimum: 1,
+          description: "Preset ID to delete.",
+        },
+      },
+      required: ["id"],
+      additionalProperties: false,
     },
-    allowedRoles: ["admin","manager"],
-    examples: { minimal: {} },
+    allowedRoles: ["admin"],
+    examples: { minimal: { id: 5 } },
   },
 ];
