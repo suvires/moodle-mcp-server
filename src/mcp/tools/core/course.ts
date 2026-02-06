@@ -837,8 +837,9 @@ export const core_course_tools: ToolSpec[] = [
       typical: { classification: "inprogress", limit: 10, offset: 0 },
     },
   },
+  // Shortened from core_course_get_enrolled_courses_with_action_events_by_timeline_classification (MCP 64-char limit)
   {
-    name: "core_course_get_enrolled_courses_with_action_events_by_timeline_classification",
+    name: "core_course_get_enrolled_action_events_by_timeline",
     moodleFunction:
       "core_course_get_enrolled_courses_with_action_events_by_timeline_classification",
     description:

@@ -2039,8 +2039,9 @@ export const core_competency_tools: ToolSpec[] = [
       minimal: { userevidenceid: 10, competencyid: 5 },
     },
   },
+  // Shortened from core_competency_request_review_of_user_evidence_linked_competencies (MCP 64-char limit)
   {
-    name: "core_competency_request_review_of_user_evidence_linked_competencies",
+    name: "core_competency_request_review_user_evidence_linked",
     moodleFunction: "core_competency_request_review_of_user_evidence_linked_competencies",
     description: "Requests review of all competencies linked to user evidence.",
     inputSchema: {
